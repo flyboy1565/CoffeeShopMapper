@@ -79,14 +79,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="mb-3">
-                            <label for="shop_name" class="form-label">Shop Type</label>
-                            <select id="shop_type" class="form-select" aria-label="Default select example">
-                                <option selected></option>
-                                <option value="independant">Independant</option>
-                                <option value="chain">Chain</option>
-                            </select>
-                        </div>                        
+                         <div class="mb-3">
+                            <label for="shop_application_date" class="form-label">Date</label>
+                            <input type="date" class="form-control" id="shop_application_date">
+                        </div>                      
                     </div>
                     <div class="row">
                         <div class="col-auto">
@@ -199,15 +195,15 @@
             get_all()
             $('#saveBtn').click(function(){
                 var name = $("#shop_name").val()
-                var shop_type = $("#shop_type option:selected").val()
+                var application_date = $("#shop_application_date").val()
                 var latitude = $("#latitude").val()
                 var longitude = $("#longitude").val()
-                var data = {"Name":name,'Latitude': latitude, 'Longitude': longitude}
+                var data = {"Name":name,'Latitude': latitude, 'Longitude': longitude, 'application_date':application_date}
                 // data = JSON.stringify(data)
                 console.log(data)
                 $.ajax({
                     url :  URL +'add',
-                    type : 'PUT',
+                    type : 'GET',
                     dataType:'json',
                     contentType: "application/json",
                     data: JSON.stringify(data),
