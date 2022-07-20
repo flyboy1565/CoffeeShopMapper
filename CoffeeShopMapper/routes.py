@@ -7,6 +7,7 @@ from bson.objectid import ObjectId
 from bson.json_util import dumps
 from bottle import route, view, request
 from pymongo import MongoClient, errors
+from ast import literal_eval
 
 # try to connect to the database
 try:
@@ -42,11 +43,14 @@ def one_item(id):
         return {}
 
 # put method allows users to create a new entry     
-@route('/add', methods=('PUT',))
+@route('/add', methods=('GET',))
 def add_one():
-    data = request.get_json()
+    data = {}
+    for key, value in request.query.items():
+        if key is not None:
+            data = literal_eval(key)
     SHOPS.insert_one(data)
-    cursor = SHOPS.find({"name":data['name']})
+    cursor = SHOPS.find({"name":data['Name']})
     return dumps(cursor)
 
 
