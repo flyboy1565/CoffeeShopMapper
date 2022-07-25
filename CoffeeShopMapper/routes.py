@@ -9,15 +9,22 @@ from bottle import route, view, request
 from pymongo import MongoClient, errors
 from ast import literal_eval
 
-# try to connect to the database
-try:
-    client  = MongoClient('mongodb://docker:mongopw@localhost:49153/CoffeeShops?authSource=admin')
-    db = client.CoffeeShops
-    SHOPS = db.shops
-except errors.ServerSelectionTimeoutError as err:
-# if connection fails print the message below
-    client = None
-    print("PyMongo doesn't appear to be allowing a connection")
+
+def createDBConnection():
+    # try to connect to the database
+    try:
+        # john 'mongodb://docker:mongopw@localhost:49153/CoffeeShops?authSource=admin'
+        uri = "mongodb://studentmysql:27017/?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false"
+        client  = MongoClient(uri)
+        db = client.CIT440A_john_holstine 
+        SHOPS = db.CoffeeShops
+        return SHOPS
+    except errors.ServerSelectionTimeoutError as err:
+    # if connection fails print the message below
+        client = None
+        print("PyMongo doesn't appear to be allowing a connection")
+
+SHOPS = createDBConnection()
 
 @route('/')
 @route('/home')
