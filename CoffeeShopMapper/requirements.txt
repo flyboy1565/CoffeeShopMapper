@@ -1,2 +1,8 @@
-bottle~=0.12
+boddle==0.2.9
+bottle==0.12.21
+bson==0.5.10
+pip==19.2.3
 pymongo==4.1.1
+python-dateutil==2.8.2
+setuptools==41.2.0
+six==1.16.0
